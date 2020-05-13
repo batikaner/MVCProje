@@ -1,0 +1,105 @@
+﻿@using MVCProje.Models.SerieViewModels
+@model SerieViewModels
+@{
+    ViewBag.Title = "Main";
+}
+<h1 style="color:grey; font-family: fantasy; font-size:25px;" align="center">Welcome   @Session["userLogin"].ToString().Trim().ToUpper()!</h1>
+
+
+<table align="center" class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th>Process</th>
+            <th>Title</th>
+            <th>Rank</th>
+
+        </tr>
+    </thead>
+
+
+    <tbody>
+        <tr>
+            <td><a href="#" class="btn btn-sm btn-outline-warning">Update</a><a href="#" class="btn btn-sm btn-outline-danger">Delete</a></td>
+            <td style="font-size:18px">ESARETİN Bedeli</td>
+            <td> 9.0   <span style='font-size:20px; color:	#FFFF33;'>&#9733;</span> </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<a href="/Main/Logout/"> tes</a>
+
+
+
+<br />
+<hr />
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openit">Add Serie</button>
+<!--Start Script  -->
+<!-- Modal Start -->
+<div class="modal fade" id="openit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+
+                    @using (Html.BeginForm("NewSerie", "Main", FormMethod.Post))
+                    {
+                        @Html.LabelFor(gg => gg.tv.title)
+                        @Html.TextBoxFor(gg => gg.tv.title, new { @class = "form-control" })
+                        <br />
+                        @Html.LabelFor(gg => gg.tv.rating)
+                        @Html.TextBoxFor(gg => gg.tv.rating, new { @class = "form-control" })
+                        <input type="submit" name="btnKaydet" onclick="NewSerie()" class="btn btn-success" />
+                    }
+
+
+
+
+                </div>
+                <div class="form-group">
+                   
+
+
+                </div>
+
+
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<span style='font-size:30px; color:	#FFFF33;'>&#9733;</span>
+
+
+<!-- Modal End -->
+@section scripts{
+    <script>
+        function NewSerie() {
+            $.ajax({
+                url: "/Main/NewSerie",
+                method: "Post",
+                data: {
+                    title: $("#title").val(),
+                    rating: $("#rating").val()
+                },
+                success: function () {
+                    alert("Added!");
+                }
+            });
+        }
+
+    </script>
+}
+<!--End Script-->
