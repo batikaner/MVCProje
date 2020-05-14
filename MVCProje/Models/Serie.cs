@@ -10,10 +10,13 @@ namespace MVCProje.Models
     {
         public int SerieId { get; set; }
 
+
+        [Required(ErrorMessage = "Enter title")]
         [Display(Name = "Title")]
         public string  title { get; set; }
 
 
+        [Required(ErrorMessage = "Enter rating")]
         [Display(Name = "Rating")]
         public string rating { get; set; }
 

@@ -1,0 +1,51 @@
+﻿@using MVCProje.Models
+@model Serie
+@{
+    ViewBag.Title = "Update";
+}
+
+<h1 style="color:grey; font-family: fantasy; font-size:25px;" align="center">User:   @Session["userLogin"].ToString().Trim().ToUpper()!</h1>
+
+<h2>Update Page</h2>
+<center>
+    @using (Html.BeginForm("Update", "Main", FormMethod.Post))
+    {
+        
+        @Html.HiddenFor(gg => gg.SerieId)
+        @Html.LabelFor(gg => gg.title)
+        @Html.TextBoxFor(gg => gg.title, new { @class = "form-control" })
+
+        <br />
+        @Html.LabelFor(gg => gg.rating)
+        @Html.TextBoxFor(gg => gg.rating, new { @type = "number", @maxlength = "4", step = "0.1", @min = "1", @max = "10" })
+
+        <br>
+        <input type="submit" value="Save" name="btnSave" onclick="update()" class="btn btn-success" />
+
+    }
+
+</center>
+@section scripts{
+
+    <script>
+
+        /*
+        function update() {
+            $.ajax({
+                url: "/Main/Update",
+                method: "Post",
+                data: {
+                    title: $("#title").val(),
+                    rating: $("#rating").val()
+                },
+                success: function () {
+                    alert("Öğrenci Ekleme Başarılı!");
+                }
+            });
+        }
+        */
+
+
+    </script>
+
+}

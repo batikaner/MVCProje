@@ -161,12 +161,14 @@
         <!--Form Start-->
         @Html.TextBoxFor(user => user.Username, new { @placeholder = "Username" })
         <label id="lblusername" style="display:none;color:red;">Username is required!</label>
-        @Html.PasswordFor(user => user.Password, new { @placeholder = "Password" })
-        <label id="lblPass" style="display:none;color:red;">Passwords do not Match!</label>
-        <input type="password" placeholder="Password" name="pass" id="pass" required>
 
-        <label id="lblPassw" style="display:none;color:red;">Passwords do not Match!</label>
-        <input type="submit" value="Let's Start" name="btnKaydet" onclick="test()" />
+        @Html.PasswordFor(user => user.Password, new { @placeholder = "Password" })
+        <label id="lblPass"  name="lblPass"   style="display:none;color:red;">Passwords do not Match!</label>
+
+        <input type="password" placeholder="Password" name="pass" id="pass" required>
+        <label id="lblPassw" name="lblPassw"  style="display:none;color:red;">Passwords do not Match!</label>
+
+        <input type="submit" value="Let's Start" name="btnSave" onclick="test()" />
     </div>
     <!-- Form End-->
 
@@ -175,7 +177,7 @@
     <script>
         //Client Side Validation Start
         function test() {
-            if ($("#Password").val() == $("#pass").val()  && $("#Username").val()  != "") {
+            if ($("#Password").val() == $("#pass").val() && $("#Username").val().trim() != "") {
                 // alert("eşleşti");
                 $.ajax({
                     url: "/Home/CreateAccount",
@@ -192,10 +194,17 @@
             }
             else if ($("#Username").val()  == "") {
                 $("#lblusername").show();
+                
             }
-            else if ($("#Password").val().trim() != $("#pass").val().trim()) {
+            else if($("#Password").val().trim() ==""){
+                 $("#lblPass").show();
+            }
+            else if ($("#Password").val() != $("#pass").val()) {
                 $("#lblPass").show();
                 $("#lblPassw").show();
+            }
+            else if ($("#pass").val().trim() == "") {
+                 $("#lblPassw").show();
             }
             //Client Side Validation End
         }
