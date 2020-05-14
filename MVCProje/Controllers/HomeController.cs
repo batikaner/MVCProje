@@ -57,6 +57,7 @@ namespace MVCProje.Controllers
             {
                 ctx.Users.Add(usr);
                 int x = ctx.SaveChanges();
+
                 if (x > 0)
                 {
                     return RedirectToAction("Index");

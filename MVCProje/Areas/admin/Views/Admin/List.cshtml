@@ -41,9 +41,30 @@
 
 
     </tbody>
+
+
 </table>
 
 <br />
 
- 
+<div class="form-group">
+    <label style="margin-left:auto;margin-right:auto">Yorum ekleme kapalıdır</label>
+    <textarea name="txtComment" id="editor1" class="form-control" style="margin-left:auto;margin-right:auto"></textarea>
+</div>
 
+
+@section scripts {
+
+
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+    var editor = CKEDITOR.instances['editor1'];
+    if (editor) { editor.destroy(true); }
+    CKEDITOR.replace('editor1', {
+    enterMode: CKEDITOR.ENTER_BR,
+    });
+    CKFinder.setupCKEditor(null, '@Url.Content("~/ckeditor/ckfinder/")');
+    </script>
+   
+
+}

@@ -19,6 +19,7 @@
         font-family: Arial;
         font-size: 12px;
     }
+
     .body {
         position: absolute;
         width: auto;
@@ -28,6 +29,7 @@
         background-size: cover;
         z-index: 0;
     }
+
     .grad {
         position: absolute;
         top: -20px;
@@ -40,12 +42,14 @@
         z-index: 1;
         opacity: 0.7;
     }
+
     .header {
         position: absolute;
         top: calc(50% - 35px);
         left: calc(50% - 255px);
         z-index: 2;
     }
+
         .header div {
             float: left;
             color: #fff;
@@ -109,7 +113,7 @@
             padding: 6px;
             margin-top: 10px;
         }
-    
+
         .login [type=button] {
             width: 260px;
             height: 35px;
@@ -152,8 +156,6 @@
     ::-webkit-input-placeholder {
         color: rgba(255,255,255,0.6);
     }
-
-  
 </style>
 
 <body>
@@ -163,10 +165,10 @@
         <label id="lblusername" style="display:none;color:red;">Username is required!</label>
 
         @Html.PasswordFor(user => user.Password, new { @placeholder = "Password" })
-        <label id="lblPass"  name="lblPass"   style="display:none;color:red;">Passwords do not Match!</label>
+        <label id="lblPass" name="lblPass" style="display:none;color:red;">Passwords do not Match!</label>
 
         <input type="password" placeholder="Password" name="pass" id="pass" required>
-        <label id="lblPassw" name="lblPassw"  style="display:none;color:red;">Passwords do not Match!</label>
+        <label id="lblPassw" name="lblPassw" style="display:none;color:red;">Passwords do not Match!</label>
 
         <input type="submit" value="Let's Start" name="btnSave" onclick="test()" />
     </div>
@@ -188,23 +190,32 @@
                     },
                     success: function () {
                         alert("Proccess Succes!");
-                         window.location.href = "/Home/Index";
+                        window.location.href = "/Home/Index";
                     }
                 });
             }
-            else if ($("#Username").val()  == "") {
+            else if ($("#Username").val() == "") {
                 $("#lblusername").show();
-                
+                if ($("#Password").val() != $("#pass").val()) {
+                    $("#lblPass").show();
+                    $("#lblPassw").show();
+                }
+
             }
-            else if($("#Password").val().trim() ==""){
-                 $("#lblPass").show();
+            else if ($("#Password").val().trim() == "") {
+                $("#lblPass").show();
             }
             else if ($("#Password").val() != $("#pass").val()) {
                 $("#lblPass").show();
                 $("#lblPassw").show();
             }
+
             else if ($("#pass").val().trim() == "") {
-                 $("#lblPassw").show();
+                $("#lblPassw").show();
+            }
+            else if ($("#Username").val().trim() != "" & &$("#Password").val()  == $("#pass").val()  && $("#pass").val() == "" && $("#Password").val()  == "") {
+                 $("#lblPass").show();
+                $("#lblPassw").show();
             }
             //Client Side Validation End
         }
